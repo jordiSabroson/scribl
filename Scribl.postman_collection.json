@@ -1,0 +1,249 @@
+{
+	"info": {
+		"_postman_id": "f47fb9cf-fba1-451b-984b-4955e172be37",
+		"name": "Scribl",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Pàgina de registre",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{scribl_url}}/test",
+					"host": [
+						"{{scribl_url}}"
+					],
+					"path": [
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registre",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Frederick\",\n    \"surname\": \"Mou\",\n    \"email\": \"frederick@gmail.com\",\n    \"password\": \"12345\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{scribl_url}}/register",
+					"host": [
+						"{{scribl_url}}"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"try {",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    if (jsonData.data) {",
+							"        postman.setEnvironmentVariable(\"scribl_token\", jsonData.data.access_token);",
+							"    }",
+							"} catch ($e) {",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"frederick@gmail.com\",\n    \"password\": \"makelele\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{scribl_url}}/api/login",
+					"host": [
+						"{{scribl_url}}"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "TI7SzD6eGceaWkCpR1s6iV8XwgAeoHraxvolA7qCde7bad15",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{scribl_url}}/api/logout",
+					"host": [
+						"{{scribl_url}}"
+					],
+					"path": [
+						"api",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recover password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"jmanya@apiabalit.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{scribl_url}}/api/recover",
+					"host": [
+						"{{scribl_url}}"
+					],
+					"path": [
+						"api",
+						"recover"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reset password",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "$2y$12$r8KF1ORXCitFtpItKF3wke7hEtpdYC8SW0Gr62A1kS3nUJHYEHiAe",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\": \"makelele\",\n    \"confirm_password\": \"makelele\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{scribl_url}}/api/reset-password",
+					"host": [
+						"{{scribl_url}}"
+					],
+					"path": [
+						"api",
+						"reset-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Matias\",\n    \"surname\": \"Pi\",\n    \"email\": \"matias@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{scribl_url}}/api/edit/?id=3",
+					"host": [
+						"{{scribl_url}}"
+					],
+					"path": [
+						"api",
+						"edit",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add_note",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "update note",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "delete note",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		}
+	]
+}
